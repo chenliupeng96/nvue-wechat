@@ -3,21 +3,64 @@
 		<!-- 导航栏 -->
 		<free-nav-bar title="仿微信(10)"></free-nav-bar>
 		<!-- 列表 -->
-		<view style="height: 2000rpx;">
-			<text>列表</text>
-		</view>
+		<block v-for="(item,index) in list" :key="index">
+			<view class="flex align-center">
+				<view class="flex align-center justify-center" style="width: 145rpx;">
+					<image :src="item.avatar" class="rounded" mode="widthFix" style="width: 92rpx;height: 92rpx;"></image>
+				</view>
+				<view class="flex flex-column border-light-secondary flex-1 py-3 pr-3">
+					<view class="flex align-center justify-between mb-1">
+						<text class="font-md">{{item.nickname}}</text>
+						<text class="font-sm text-light-muted">{{item.update_time|formatTime}}</text>
+					</view>
+					<text class="font text-ellipsis text-light-muted">{{item.data}}</text>
+				</view>
+			</view>
+		</block>
 	</view>
 </template>
 
 <script>
 	import freeNavBar from '../../../components/free-ui/free-nav-bar.vue'
+	import $Time from '@/common/free-lib/time.js'
 	export default {
 		components:{
 			freeNavBar
 		},
 		data() {
 			return {
-				
+				list:[
+					{
+						avatar:"/static/images/demo/4.jpg",
+						nickname:"梦想8k的学渣",
+						update_time:1567695767,
+						data:"[图片]"
+						
+					},
+					{
+						avatar:"/static/images/demo/2.jpg",
+						nickname:"梦想去杭州得嘟嘟 ",
+						update_time:1567695767,
+						data:"今天"
+						
+					},
+					{
+						avatar:"/static/images/demo/3.jpg",
+						nickname:"『醉』 ",
+						update_time:1567695767,
+						data:"[图片]"
+						
+					},
+					{
+						avatar:"/static/images/demo/3.jpg",
+						nickname:"『醉』 ",
+						update_time:1567695767,
+						data:"[图片]"
+						
+					}
+					 
+					
+				]
 			}
 		},
 		onLoad() {
@@ -25,6 +68,11 @@
 		},
 		methods: {
 
+		},
+		filters:{
+			formatTime(value){
+				return $Time.gettime(value)
+			}
 		}
 	}
 </script>

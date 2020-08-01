@@ -104,6 +104,23 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+  var l0 = _vm.__map(_vm.list, function(item, index) {
+    var f0 = _vm._f("formatTime")(item.update_time)
+
+    return {
+      $orig: _vm.__get_orig(item),
+      f0: f0
+    }
+  })
+
+  _vm.$mp.data = Object.assign(
+    {},
+    {
+      $root: {
+        l0: l0
+      }
+    }
+  )
 }
 var recyclableRender = false
 var staticRenderFns = []
@@ -135,7 +152,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var freeNavBar = function freeNavBar() {__webpack_require__.e(/*! require.ensure | components/free-ui/free-nav-bar */ "components/free-ui/free-nav-bar").then((function () {return resolve(__webpack_require__(/*! ../../../components/free-ui/free-nav-bar.vue */ 43));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;
 
 
 
@@ -177,19 +194,68 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+var _time = _interopRequireDefault(__webpack_require__(/*! @/common/free-lib/time.js */ 58));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var freeNavBar = function freeNavBar() {__webpack_require__.e(/*! require.ensure | components/free-ui/free-nav-bar */ "components/free-ui/free-nav-bar").then((function () {return resolve(__webpack_require__(/*! ../../../components/free-ui/free-nav-bar.vue */ 43));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 {
   components: {
     freeNavBar: freeNavBar },
 
   data: function data() {
-    return {};
+    return {
+      list: [
+      {
+        avatar: "/static/images/demo/4.jpg",
+        nickname: "梦想8k的学渣",
+        update_time: 1567695767,
+        data: "[图片]" },
+
+
+      {
+        avatar: "/static/images/demo/2.jpg",
+        nickname: "梦想去杭州得嘟嘟 ",
+        update_time: 1567695767,
+        data: "今天" },
+
+
+      {
+        avatar: "/static/images/demo/3.jpg",
+        nickname: "『醉』 ",
+        update_time: 1567695767,
+        data: "[图片]" },
+
+
+      {
+        avatar: "/static/images/demo/3.jpg",
+        nickname: "『醉』 ",
+        update_time: 1567695767,
+        data: "[图片]" }] };
+
+
+
+
 
 
   },
   onLoad: function onLoad() {
 
   },
-  methods: {} };exports.default = _default;
+  methods: {},
+
+
+  filters: {
+    formatTime: function formatTime(value) {
+      return _time.default.gettime(value);
+    } } };exports.default = _default;
 
 /***/ }),
 /* 17 */
