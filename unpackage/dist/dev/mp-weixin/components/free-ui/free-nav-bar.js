@@ -112,7 +112,11 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var freeIconButton = function freeIconButton() {__webpack_require__.e(/*! require.ensure | components/free-ui/free-icon-button */ "components/free-ui/free-icon-button").then((function () {return resolve(__webpack_require__(/*! ./free-icon-button.vue */ 53));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var freeIconButton = function freeIconButton() {__webpack_require__.e(/*! require.ensure | components/free-ui/free-icon-button */ "components/free-ui/free-icon-button").then((function () {return resolve(__webpack_require__(/*! ./free-icon-button.vue */ 53));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+
+
+
+
 
 
 
@@ -138,7 +142,11 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
   props: {
     title: {
       type: [String, Boolean],
-      default: false } },
+      default: false },
+
+    fixed: {
+      type: Boolean,
+      default: true } },
 
 
   components: {
@@ -146,14 +154,21 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
   data: function data() {
     return {
-      statusBarHeight: 0 };
-
+      statusBarHeight: 0, // 状态栏高度
+      navBarHeight: 0 // 占位高度
+    };
   },
   mounted: function mounted() {
 
 
 
-  } };exports.default = _default;
+    this.navBarHeight = this.statusBarHeight + uni.upx2px(90);
+  },
+  computed: {
+    fixedStyle: function fixedStyle() {
+      return "height:".concat(this.navBarHeight, "px");
+    } } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ })
 

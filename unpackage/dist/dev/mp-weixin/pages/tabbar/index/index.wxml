@@ -1,1 +1,1 @@
-<view><free-nav-bar vue-id="f8c7e56e-1" title="仿微信(10)" bind:__l="__l"></free-nav-bar></view>
+<view><free-nav-bar vue-id="f8c7e56e-1" title="仿微信(10)" bind:__l="__l"></free-nav-bar><view style="height:2000rpx;"><text>列表</text></view></view>

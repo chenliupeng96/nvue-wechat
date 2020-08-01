@@ -2,6 +2,10 @@
 	<view>
 		<!-- 导航栏 -->
 		<free-nav-bar title="仿微信(10)"></free-nav-bar>
+		<!-- 列表 -->
+		<view style="height: 2000rpx;">
+			<text>列表</text>
+		</view>
 	</view>
 </template>
 

@@ -3,7 +3,7 @@
 	class="flex align-center justify-center" 
 	style="height: 90rpx;width: 90rpx;"
 	hover-class="bg-hover-light"
-	@click="emit('click')"
+	@click="$emit('click')"
 	>
 		<text class="iconfont font-md">{{icon}}</text>
 	</view>
