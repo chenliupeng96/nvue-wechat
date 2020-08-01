@@ -1,16 +1,23 @@
 <template>
-	<view></view>
+	<view>
+		<!-- 导航栏 -->
+		<free-nav-bar title="仿微信(10)"></free-nav-bar>
+	</view>
 </template>
 
 <script>
+	import freeNavBar from '../../../components/free-ui/free-nav-bar.vue'
 	export default {
+		components:{
+			freeNavBar
+		},
 		data() {
 			return {
 				
 			}
 		},
 		onLoad() {
-
+			
 		},
 		methods: {
 
