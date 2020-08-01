@@ -205,10 +205,12 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
-var _time = _interopRequireDefault(__webpack_require__(/*! @/common/free-lib/time.js */ 58));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var freeNavBar = function freeNavBar() {__webpack_require__.e(/*! require.ensure | components/free-ui/free-nav-bar */ "components/free-ui/free-nav-bar").then((function () {return resolve(__webpack_require__(/*! ../../../components/free-ui/free-nav-bar.vue */ 43));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+
+var _time = _interopRequireDefault(__webpack_require__(/*! @/common/free-lib/time.js */ 58));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var freeNavBar = function freeNavBar() {__webpack_require__.e(/*! require.ensure | components/free-ui/free-nav-bar */ "components/free-ui/free-nav-bar").then((function () {return resolve(__webpack_require__(/*! ../../../components/free-ui/free-nav-bar.vue */ 43));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var freeAvatar = function freeAvatar() {__webpack_require__.e(/*! require.ensure | components/free-ui/free-avatar */ "components/free-ui/free-avatar").then((function () {return resolve(__webpack_require__(/*! @/components/free-ui/free-avatar.vue */ 59));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 {
   components: {
-    freeNavBar: freeNavBar },
+    freeNavBar: freeNavBar,
+    freeAvatar: freeAvatar },
 
   data: function data() {
     return {

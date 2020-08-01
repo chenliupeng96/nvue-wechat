@@ -6,7 +6,7 @@
 		<block v-for="(item,index) in list" :key="index">
 			<view class="flex align-center">
 				<view class="flex align-center justify-center" style="width: 145rpx;">
-					<image :src="item.avatar" class="rounded" mode="widthFix" style="width: 92rpx;height: 92rpx;"></image>
+					<free-avatar :src="item.avatar" size="92" ></free-avatar>
 				</view>
 				<view class="flex flex-column border-light-secondary flex-1 py-3 pr-3">
 					<view class="flex align-center justify-between mb-1">
@@ -22,10 +22,12 @@
 
 <script>
 	import freeNavBar from '../../../components/free-ui/free-nav-bar.vue'
+	import freeAvatar from '@/components/free-ui/free-avatar.vue'
 	import $Time from '@/common/free-lib/time.js'
 	export default {
 		components:{
-			freeNavBar
+			freeNavBar,
+			freeAvatar
 		},
 		data() {
 			return {
