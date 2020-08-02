@@ -1,5 +1,5 @@
 <template>
-	<view hover-class="bg-light">
+	<view :class="item.istop ? 'bg-light' : 'bg-white'" hover-class="bg-light">
 		<div class="flex align-stretch" @longpress="long" @click="btnClick">
 			<view class="flex align-center justify-center position-relative " style="width: 145rpx;">
 				<free-avatar :src="item.avatar" size="92"></free-avatar>
@@ -21,7 +21,7 @@
 	import freeBadge from '@/components/free-ui/free-badge.vue'
 	import freeBase from '../../common/mixin/free-base.js'
 	export default {
-		mixins:[freeBase],
+		mixins: [freeBase],
 		props: {
 			item: Object,
 			index: Number
@@ -32,16 +32,18 @@
 		},
 		methods: {
 			// 判断是否是数组并且有值
-			isArrayOrValuable(value){
+			isArrayOrValuable(value) {
 				return Array.isArray(value) && value.length > 0
 			},
 			long(e) {
 				let x = 0;
 				let y = 0;
-				let {changedTouches} = e;
+				let {
+					changedTouches
+				} = e;
 				console.log(changedTouches);
-				if(this.isArrayOrValuable(changedTouches)){
-					
+				if (this.isArrayOrValuable(changedTouches)) {
+
 					// #ifdef MP-WEIXIN
 					x = changedTouches[0].clientX;
 					y = changedTouches[0].clientY;
@@ -51,7 +53,11 @@
 					y = changedTouches[0].screenY;
 					// #endif
 				}
-				this.$emit('long',{x,y,index:this.index})
+				this.$emit('long', {
+					x,
+					y,
+					index: this.index
+				}, )
 			},
 			btnClick() {
 				this.$emit('click')

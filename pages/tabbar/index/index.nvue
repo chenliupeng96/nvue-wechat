@@ -3,8 +3,13 @@
 		<!-- 导航栏 -->
 		<free-nav-bar title="仿微信" noreadnum="1"></free-nav-bar>
 		<!-- 列表 -->
+		<!-- 置顶列表 -->
 		<block v-for="(item,index) in list" :key="index">
-			<free-media-list :item="item" :index="index" @long="long"></free-media-list>
+			<free-media-list v-if="item.istop"  :item="item" :index="index" @long="long"></free-media-list>
+		</block>
+		<!-- 非置顶列表 -->
+		<block v-for="(item,index) in list" :key="index">
+			<free-media-list v-if="!item.istop"  :item="item" :index="index" @long="long"></free-media-list>
 		</block>
 		<!-- 弹出层 -->
 		<free-popup ref="extend" :bodyWidth="300" :bodyHeight="getMenusHeight">
@@ -54,7 +59,8 @@
 						nickname:"梦想8k的学渣",
 						update_time:1567695767,
 						data:"[图片]",
-						noreadNum:1
+						noreadNum:1,
+						istop:false
 						
 					},
 					{
@@ -62,7 +68,8 @@
 						nickname:"梦想去杭州得嘟嘟 ",
 						update_time:1567695767,
 						data:"今天",
-						noreadNum:1
+						noreadNum:1,
+						istop:true
 						
 					},
 					{
@@ -70,7 +77,8 @@
 						nickname:"『醉』 ",
 						update_time:1567695767,
 						data:"[图片]",
-						noreadNum:0
+						noreadNum:0,
+						istop:false
 						
 					},
 					{
@@ -78,7 +86,8 @@
 						nickname:"『醉』 ",
 						update_time:1567695767,
 						data:"[图片]",
-						noreadNum:1
+						noreadNum:1,
+						istop:false
 						
 					}
 					 
@@ -103,12 +112,16 @@
 			long({x,y,index}){
 				// 初始化
 				this.propIndex = index;
+				// 判断之前是否处于置顶状态
+				let item = this.list[index];
+				this.menus[0].name = item.istop ? '取消置顶' : '设为置顶'
 				this.$refs['extend'].show(x,y);
 			},
 			// 分发菜单事件
 			clickEvent(event){
 				switch(event){
 					case "setTop":
+						this.setTop();
 						break;
 					case "delChat": // 删除当前会话
 						this.delChat();
@@ -119,6 +132,11 @@
 			// 删除当前会话
 			delChat(){
 				this.list.splice(this.propIndex,1);
+			},
+			// 置顶/取消置顶会话
+			setTop(){
+
+				this.list[this.propIndex].istop=!this.list[this.propIndex].istop
 			}
 		},
 	}
