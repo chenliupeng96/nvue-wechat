@@ -4,33 +4,18 @@
 		<free-nav-bar title="仿微信(10)"></free-nav-bar>
 		<!-- 列表 -->
 		<block v-for="(item,index) in list" :key="index">
-			<view class="flex align-stretch">
-				<view class="flex align-center justify-center position-relative " style="width: 145rpx;">
-					<free-avatar :src="item.avatar" size="92" ></free-avatar>
-					<free-badge badgeClass="position-absolute" badgeStyle="top:15rpx;right:15rpx;" badgeContext="1"></free-badge>
-				</view>
-				<view class="flex flex-column border-light-secondary flex-1 py-3 pr-3">
-					<view class="flex align-center justify-between mb-1">
-						<text class="font-md">{{item.nickname}}</text>
-						<text class="font-sm text-light-muted">{{item.update_time|formatTime}}</text>
-					</view>
-					<text class="font text-ellipsis text-light-muted">{{item.data}}</text>
-				</view>
-			</view>
+			<free-media-list :item="item" :index="index"></free-media-list>
 		</block>
 	</view>
 </template>
 
 <script>
-	import freeNavBar from '../../../components/free-ui/free-nav-bar.vue'
-	import freeAvatar from '@/components/free-ui/free-avatar.vue'
-	import freeBadge from '@/components/free-ui/free-badge.vue'
-	import $Time from '@/common/free-lib/time.js'
+	import freeNavBar from '@/components/free-ui/free-nav-bar.vue'
+	import freeMediaList from '@/components/free-ui/free-media-list.vue'
 	export default {
 		components:{
 			freeNavBar,
-			freeAvatar,
-			freeBadge
+			freeMediaList
 		},
 		data() {
 			return {
@@ -39,28 +24,32 @@
 						avatar:"/static/images/demo/4.jpg",
 						nickname:"梦想8k的学渣",
 						update_time:1567695767,
-						data:"[图片]"
+						data:"[图片]",
+						noreadNum:1
 						
 					},
 					{
 						avatar:"/static/images/demo/2.jpg",
 						nickname:"梦想去杭州得嘟嘟 ",
 						update_time:1567695767,
-						data:"今天"
+						data:"今天",
+						noreadNum:1
 						
 					},
 					{
 						avatar:"/static/images/demo/3.jpg",
 						nickname:"『醉』 ",
 						update_time:1567695767,
-						data:"[图片]"
+						data:"[图片]",
+						noreadNum:0
 						
 					},
 					{
 						avatar:"/static/images/demo/3.jpg",
 						nickname:"『醉』 ",
 						update_time:1567695767,
-						data:"[图片]"
+						data:"[图片]",
+						noreadNum:1
 						
 					}
 					 
@@ -74,11 +63,6 @@
 		methods: {
 
 		},
-		filters:{
-			formatTime(value){
-				return $Time.gettime(value)
-			}
-		}
 	}
 </script>
 
