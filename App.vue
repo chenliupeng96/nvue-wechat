@@ -22,6 +22,9 @@
 <style>
 	/*每个页面公共css */
 	@import "@/common/free.css";
+	
+	/* #ifdef MP-WEIXIN */
 	@import "@/common/free-icon.css";
-	@import "@/common/common.css"
+	/* #endif */
+	@import "@/common/common.css";
 </style>

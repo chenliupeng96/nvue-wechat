@@ -1,14 +1,25 @@
 <template>
 	<view>
 		<!-- 导航栏 -->
-		<free-nav-bar title="仿微信" noreadnum="1" @openExtend="openExtend"></free-nav-bar>
+		<free-nav-bar title="仿微信" noreadnum="1"></free-nav-bar>
 		<!-- 列表 -->
 		<block v-for="(item,index) in list" :key="index">
-			<free-media-list :item="item" :index="index"></free-media-list>
+			<free-media-list :item="item" :index="index" @long="long"></free-media-list>
 		</block>
 		<!-- 弹出层 -->
-		<free-popup ref="extend" maskColor mask>
-			<view style="height: 300rpx;width: 300rpx;"></view>
+		<free-popup ref="extend" :bodyWidth="300" :bodyHeight="getMenusHeight">
+			<view class="flex flex-column" style="width: 240rpx;" :style="getMenusStyle" >
+				
+				<view
+				 class="flex align-center flex-1"
+				  hover-class="bg-light" v-for="(menuItem,menuIndex) in menus"
+				   :key="menuIndex"
+				   @click="clickEvent(menuItem.event)"
+				   
+				   >
+					<text class="font-md pl-3">{{menuItem.name}}</text>
+				</view>
+			</view>
 		</free-popup>
 	</view>
 </template>
@@ -19,12 +30,24 @@
 	import freePopup from '@/components/free-ui/free-popup.vue'
 	export default {
 		components:{
+			
 			freeNavBar,
 			freeMediaList,
 			freePopup
 		},
 		data() {
 			return {
+				propIndex:-1,
+				menus:[
+					{
+						name:"设为置顶",
+						event:"setTop"
+					},
+					{
+						name:"删除聊天",
+						event:"delChat"
+					}
+				],
 				list:[
 					{
 						avatar:"/static/images/demo/4.jpg",
@@ -66,9 +89,36 @@
 		onLoad() {
 			
 		},
+		computed:{
+			// 动态获取菜单高度
+			getMenusHeight(){
+				let H = 100;
+				return this.menus.length * H;
+			},
+			getMenusStyle(){
+				return `height:${this.getMenusHeight}rpx;`
+			}
+		},
 		methods: {
-			openExtend(){
-				this.$refs['extend'].show(100,200);
+			long({x,y,index}){
+				// 初始化
+				this.propIndex = index;
+				this.$refs['extend'].show(x,y);
+			},
+			// 分发菜单事件
+			clickEvent(event){
+				switch(event){
+					case "setTop":
+						break;
+					case "delChat": // 删除当前会话
+						this.delChat();
+						break;
+				}
+				this.$refs['extend'].hide();
+			},
+			// 删除当前会话
+			delChat(){
+				this.list.splice(this.propIndex,1);
 			}
 		},
 	}

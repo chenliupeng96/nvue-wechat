@@ -3,13 +3,16 @@
 		<!-- 蒙版 -->
 		<div v-if="mask" class="position-fixed top-0 left-0 bottom-0 right-0" :style="getMaskCOlor" @click="hide"></div>
 		<!-- 弹出框内容 -->
-		<div class="position-fixed bg-white" :class="getBodyClass" :style="getBodyStyle">
+		<div ref="popup"  class="position-fixed free-animated" :class="getBodyClass" :style="getBodyStyle">
 			<slot></slot>
 		</div>
 	</div>
 </template>
 
 <script>
+	// #ifdef APP-PLUS-NVUE
+	const animation = weex.requireModule('animation');
+	// #endif
 	export default {
 		props: {
 			// 是否开启蒙版颜色
@@ -26,13 +29,43 @@
 			bottom: {
 				type: Boolean,
 				default: false
+			},
+			// 弹出层内容高度
+			bodyHeight:{
+				type:Number,
+				default:0
+			},
+			// 弹出层内容宽度
+			bodyWidth:{
+				type:Number,
+				default:0
+			},
+			bodyBgColor:{
+				type:String,
+				default:"bg-white"
+			},
+			transformOrigin:{
+				type:String,
+				default:"left top"
 			}
+			
 		},
 		data() {
 			return {
 				status: false,
 				x: -1,
-				y: -1
+				y: -1,
+				maxX:0,
+				maxY:0
+			}
+		},
+		mounted() {
+			try{
+				let res = uni.getSystemInfoSync()
+				this.maxX = res.windowWidth - uni.upx2px(this.bodyWidth);
+				this.maxY = res.windowHeight - uni.upx2px(this.bodyHeight);
+			}catch(e){
+				//TODO handle the exception
 			}
 		},
 		computed: {
@@ -42,7 +75,7 @@
 			},
 			getBodyClass() {
 				let bottom = this.bottom ? 'left-0 right-0 bottom-0' : 'rounded border'
-				return bottom
+				return `${this.bodyBgColor} ${bottom}`
 			},
 			getBodyStyle() {
 				let left = this.x > -1 ? `left:${this.x}px;` : "";
@@ -52,16 +85,56 @@
 		},
 		methods: {
 			show(x = -1, y = -1) {
-				this.x = x;
-				this.y = y;
+				
+				this.x = (x>this.maxX)?this.maxX:x;
+				this.y = (y>this.maxY)?this.maxY:y;
 				this.status = true;
+				// #ifdef APP-PLUS-NVUE
+				this.$nextTick(()=>{
+					animation.transition(this.$refs.popup, {
+					    styles: {
+					        transform: 'scale(1,1)',
+							transformOrigin:this.transformOrigin,
+							opacity:1
+					    },
+					    duration: 100, //ms
+					    timingFunction: 'ease',
+					    }, ()=>{
+					        
+					    })
+				})
+				// #endif
 			},
 			hide() {
-				this.status = false
+				// #ifdef APP-PLUS-NVUE
+				this.$nextTick(()=>{
+					animation.transition(this.$refs.popup, {
+					    styles: {
+					        transform: 'scale(0,0)',
+							transformOrigin:this.transformOrigin,
+							opacity:0
+					    },
+					    duration: 100, //ms
+					    timingFunction: 'ease',
+					    }, ()=>{
+					       this.status = false
+					    })
+				})
+				// #endif
+				// #ifdef MP-WEIXIN
+				 this.status = false
+				// #endif
+				
 			}
 		}
 	}
 </script>
 
-<style>
+<style scoped>
+	.free-animated {
+		/* #ifdef APP-PLUS-NVUE */
+		transform: scale(0,0);
+		opacity: 0;
+		/* #endif */
+	}
 </style>

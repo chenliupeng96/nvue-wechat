@@ -533,6 +533,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 /* 1. 页面背景色 */
 .page{
 	background-color: #EDEDED;

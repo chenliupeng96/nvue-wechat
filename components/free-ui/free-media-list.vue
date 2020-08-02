@@ -31,8 +31,27 @@
 			freeBadge
 		},
 		methods: {
+			// 判断是否是数组并且有值
+			isArrayOrValuable(value){
+				return Array.isArray(value) && value.length > 0
+			},
 			long(e) {
-				console.log(e);
+				let x = 0;
+				let y = 0;
+				let {changedTouches} = e;
+				console.log(changedTouches);
+				if(this.isArrayOrValuable(changedTouches)){
+					
+					// #ifdef MP-WEIXIN
+					x = changedTouches[0].clientX;
+					y = changedTouches[0].clientY;
+					// #endif
+					// #ifdef APP-PLUS-NVUE
+					x = changedTouches[0].screenX;
+					y = changedTouches[0].screenY;
+					// #endif
+				}
+				this.$emit('long',{x,y,index:this.index})
 			},
 			btnClick() {
 				this.$emit('click')

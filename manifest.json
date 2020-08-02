@@ -7,7 +7,7 @@
     "transformPx" : false,
     /* 5+App特有相关 */
     "app-plus" : {
-		"renderer": "native",
+        "renderer" : "native",
         "usingComponents" : true,
         "nvueCompiler" : "uni-app",
         "compilerVersion" : 3,
@@ -58,7 +58,7 @@
     "quickapp" : {},
     /* 小程序特有相关 */
     "mp-weixin" : {
-        "appid" : "",
+        "appid" : "wx68d8266a1223faca",
         "setting" : {
             "urlCheck" : false
         },
@@ -73,7 +73,7 @@
     "mp-toutiao" : {
         "usingComponents" : true
     },
-    "uniStatistics": {  
-        "enable": false
+    "uniStatistics" : {
+        "enable" : false
     }
 }
