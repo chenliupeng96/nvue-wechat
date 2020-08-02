@@ -19,8 +19,9 @@
 <script>
 	import freeAvatar from '@/components/free-ui/free-avatar.vue'
 	import freeBadge from '@/components/free-ui/free-badge.vue'
-	import $Time from '@/common/free-lib/time.js'
+	import freeBase from '../../common/mixin/free-base.js'
 	export default {
+		mixins:[freeBase],
 		props: {
 			item: Object,
 			index: Number
@@ -28,11 +29,6 @@
 		components: {
 			freeAvatar,
 			freeBadge
-		},
-		filters: {
-			formatTime(value) {
-				return $Time.gettime(value)
-			}
 		},
 		methods: {
 			long(e) {

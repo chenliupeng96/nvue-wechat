@@ -143,8 +143,9 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
 
 
 
-var _time = _interopRequireDefault(__webpack_require__(/*! @/common/free-lib/time.js */ 58));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var freeAvatar = function freeAvatar() {__webpack_require__.e(/*! require.ensure | components/free-ui/free-avatar */ "components/free-ui/free-avatar").then((function () {return resolve(__webpack_require__(/*! @/components/free-ui/free-avatar.vue */ 59));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var freeBadge = function freeBadge() {__webpack_require__.e(/*! require.ensure | components/free-ui/free-badge */ "components/free-ui/free-badge").then((function () {return resolve(__webpack_require__(/*! @/components/free-ui/free-badge.vue */ 64));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
+var _freeBase = _interopRequireDefault(__webpack_require__(/*! ../../common/mixin/free-base.js */ 77));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var freeAvatar = function freeAvatar() {__webpack_require__.e(/*! require.ensure | components/free-ui/free-avatar */ "components/free-ui/free-avatar").then((function () {return resolve(__webpack_require__(/*! @/components/free-ui/free-avatar.vue */ 59));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var freeBadge = function freeBadge() {__webpack_require__.e(/*! require.ensure | components/free-ui/free-badge */ "components/free-ui/free-badge").then((function () {return resolve(__webpack_require__(/*! @/components/free-ui/free-badge.vue */ 64));}).bind(null, __webpack_require__)).catch(__webpack_require__.oe);};var _default =
 {
+  mixins: [_freeBase.default],
   props: {
     item: Object,
     index: Number },
@@ -152,11 +153,6 @@ var _time = _interopRequireDefault(__webpack_require__(/*! @/common/free-lib/tim
   components: {
     freeAvatar: freeAvatar,
     freeBadge: freeBadge },
-
-  filters: {
-    formatTime: function formatTime(value) {
-      return _time.default.gettime(value);
-    } },
 
   methods: {
     long: function long(e) {

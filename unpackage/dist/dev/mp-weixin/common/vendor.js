@@ -7901,6 +7901,23 @@ Object.defineProperty(exports, "__esModule", { value: true });exports.default = 
     return d.getFullYear() - birthday.getFullYear() - (d.getMonth() < birthday.getMonth() || d.getMonth() == birthday.getMonth() && d.getDate() < birthday.getDate() ? 1 : 0);
   } };exports.default = _default;
 
+/***/ }),
+
+/***/ 77:
+/*!************************************************************************************!*\
+  !*** C:/Users/Administrator/Desktop/bat/仿微信/nvue-wechat/common/mixin/free-base.js ***!
+  \************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _time = _interopRequireDefault(__webpack_require__(/*! @/common/free-lib/time.js */ 58));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}var _default =
+{
+  filters: {
+    formatTime: function formatTime(value) {
+      return _time.default.gettime(value);
+    } } };exports.default = _default;
+
 /***/ })
 
 }]);
