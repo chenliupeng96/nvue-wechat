@@ -146,7 +146,11 @@ __webpack_require__.r(__webpack_exports__);
 
     fixed: {
       type: Boolean,
-      default: true } },
+      default: true },
+
+    noreadnum: {
+      type: Number,
+      default: 0 } },
 
 
   components: {
@@ -167,6 +171,18 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     fixedStyle: function fixedStyle() {
       return "height:".concat(this.navBarHeight, "px");
+    },
+    getTitle: function getTitle() {
+      var noreadnum = this.noreadnum > 0 ? "(".concat(this.noreadnum, ")") : "";
+      return this.title + noreadnum;
+    } },
+
+  methods: {
+    search: function search() {
+
+    },
+    openExtend: function openExtend() {
+      this.$emit('openExtend');
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

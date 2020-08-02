@@ -8,12 +8,12 @@
 				<!-- 左边 -->
 				<view class="flex align-center">
 					<!-- 标题 -->
-					<text class="font-md ml-3" v-if="title">{{title}}</text>
+					<text class="font-md ml-3" v-if="title">{{getTitle}}</text>
 				</view>
 				<!-- 右边 -->
 				<view class="flex align-center">
-					<free-icon-button :icon="'\ue6e3'"></free-icon-button>
-					<free-icon-button :icon="'\ue682'"></free-icon-button>
+					<free-icon-button :icon="'\ue6e3'" @click="search"></free-icon-button>
+					<free-icon-button :icon="'\ue682'" @click="openExtend"></free-icon-button>
 				</view>
 			</view>
 		</view>
@@ -33,6 +33,10 @@
 			fixed:{
 				type:Boolean,
 				default:true
+			},
+			noreadnum:{
+				type:Number,
+				default:0
 			}
 		},
 		components:{
@@ -53,6 +57,18 @@
 		computed:{
 			fixedStyle(){
 				return `height:${this.navBarHeight}px`
+			},
+			getTitle(){
+				let noreadnum = this.noreadnum>0? `(${this.noreadnum})`:""
+				return this.title + noreadnum;
+			}
+		},
+		methods:{
+			search(){
+				
+			},
+			openExtend(){
+				this.$emit('openExtend')
 			}
 		}
 	}
