@@ -7,8 +7,7 @@
 			<view class="flex align-stretch">
 				<view class="flex align-center justify-center position-relative " style="width: 145rpx;">
 					<free-avatar :src="item.avatar" size="92" ></free-avatar>
-					<text class="bg-danger text-white rounded-circle font-sm position-absolute" 
-					style="padding-left: 14rpx;padding-right: 14rpx;padding-top: 6rpx;padding-bottom: 6rpx;right: 15rpx;top: 15rpx;">1</text>
+					<free-badge badgeClass="position-absolute" badgeStyle="top:15rpx;right:15rpx;" badgeContext="1"></free-badge>
 				</view>
 				<view class="flex flex-column border-light-secondary flex-1 py-3 pr-3">
 					<view class="flex align-center justify-between mb-1">
@@ -25,11 +24,13 @@
 <script>
 	import freeNavBar from '../../../components/free-ui/free-nav-bar.vue'
 	import freeAvatar from '@/components/free-ui/free-avatar.vue'
+	import freeBadge from '@/components/free-ui/free-badge.vue'
 	import $Time from '@/common/free-lib/time.js'
 	export default {
 		components:{
 			freeNavBar,
-			freeAvatar
+			freeAvatar,
+			freeBadge
 		},
 		data() {
 			return {
@@ -82,5 +83,5 @@
 </script>
 
 <style>
-	
+
 </style>
