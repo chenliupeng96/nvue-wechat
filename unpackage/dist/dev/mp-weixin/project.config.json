@@ -21,13 +21,42 @@
 			"current": -1,
 			"list": []
 		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
 		"game": {
+			"current": -1,
+			"list": []
+		},
+		"gamePlugin": {
 			"current": -1,
 			"list": []
 		},
 		"miniprogram": {
 			"current": -1,
-			"list": []
+			"list": [
+				{
+					"id": -1,
+					"name": "pages/tabbar/mail/mail",
+					"pathName": "pages/tabbar/mail/mail",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/tabbar/find/find",
+					"pathName": "pages/tabbar/find/find",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/tabbar/my/my",
+					"pathName": "pages/tabbar/my/my",
+					"scene": null
+				}
+			]
 		}
 	}
 }
