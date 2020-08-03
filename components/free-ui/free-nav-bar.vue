@@ -7,6 +7,8 @@
 			<view class="w-100 flex align-center justify-between" style="height: 90rpx;">
 				<!-- 左边 -->
 				<view class="flex align-center">
+					<!-- 返回按钮 -->
+					<free-icon-button v-if="showBack" :icon="'\ue60d'" @click="back"></free-icon-button>
 					<!-- 标题 -->
 					<text class="font-md ml-3" v-if="title">{{getTitle}}</text>
 				</view>
@@ -36,7 +38,7 @@
 </template>
 
 <script>
-	import freeIconButton from './free-icon-button.vue'
+	import freeIconButton from '@/components/free-ui/free-icon-button.vue'
 	import freePopup from '@/components/free-ui/free-popup.vue'
 	export default {
 		props: {
@@ -55,6 +57,10 @@
 			bgColor:{
 				type:String,
 				default:"bg-light"
+			},
+			showBack:{
+				type:Boolean,
+				default:false
 			}
 		},
 		components: {
@@ -121,6 +127,12 @@
 			},
 			clickEvent(){
 				
+			},
+			// 返回事件
+			back(){
+				uni.navigateBack({
+					delta:1
+				})
 			}
 		}
 	}

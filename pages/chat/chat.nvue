@@ -1,0 +1,31 @@
+<template>
+	<view>
+		<!-- 导航栏 -->
+		<free-nav-bar title="Tail" noreadnum="1" showBack>
+			<free-icon-button slot="right" :icon="'\ue6fd'"></free-icon-button>
+		</free-nav-bar>
+	</view>
+</template>
+
+<script>
+	import freeNavBar from '@/components/free-ui/free-nav-bar.vue'
+	import freeIconButton from '@/components/free-ui/free-icon-button.vue'
+	export default {
+		components:{
+			freeNavBar,
+			freeIconButton
+		},
+		data() {
+			return {
+				
+			}
+		},
+		methods: {
+			
+		}
+	}
+</script>
+
+<style>
+
+</style>

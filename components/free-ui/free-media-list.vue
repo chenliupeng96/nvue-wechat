@@ -60,7 +60,9 @@
 				}, )
 			},
 			btnClick() {
-				this.$emit('click')
+				uni.navigateTo({
+					url:"/pages/chat/chat"
+				})
 			}
 		}
 	}

@@ -16,6 +16,10 @@
             "path" : "pages/tabbar/my/my",
             "style" : {}
         }
+        ,{
+            "path" : "pages/chat/chat",
+            "style" : {}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
