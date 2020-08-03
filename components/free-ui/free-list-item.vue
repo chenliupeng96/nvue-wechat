@@ -1,6 +1,6 @@
 <template>
 	<view class="bg-white flex align-stretch" hover-class="bg-light" @click="$emit('click')">
-		<view class="flex align-center justify-center py-2 px-3">
+		<view class="flex align-center justify-center py-2 px-3" style="vertical-align: middle;">
 			<slot name="icon"></slot>
 			<image class="rounded" :src="cover" v-if="cover" mode="widthFix" :style="coverStyle"></image>
 		</view>
