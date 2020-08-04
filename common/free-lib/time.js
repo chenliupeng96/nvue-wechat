@@ -26,8 +26,14 @@ export default{
 	},
 	// 获取聊天时间（相差300s内的信息不会显示时间）
 	getChatTime(v1,v2){
+		// #ifdef APP-PLUS-NVUE
 		v1=v1.toString().length<13 ? v1*1000 : v1;
 		v2=v2.toString().length<13 ? v2*1000 : v2;
+		// #endif
+		// #ifndef APP-PLUS-NVUE
+		v1=String(v1).length<13 ? v1*1000 : v1;
+		v2=String(v2).length<13 ? v2*1000 : v2;
+		// #endif
 		if(((parseInt(v1)-parseInt(v2))/1000) > 300){
 			return this.gettime(v1);
 		}

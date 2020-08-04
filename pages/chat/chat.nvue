@@ -1,14 +1,14 @@
 <template>
 	<view>
 		<!-- 导航栏 -->
-		<free-nav-bar title="Tail" noreadnum="1" showBack>
+		<free-nav-bar title="翠兰" noreadnum="1" showBack>
 			<free-icon-button slot="right" :icon="'\ue6fd'"></free-icon-button>
 		</free-nav-bar>
 		<!-- 聊天内容区域 -->
 		<scroll-view scroll-y  class="bg-light position-fixed left-0 right-0 p-3" :style="'top:'+navBarHeight+'px'"  style="bottom: 105rpx;">
 			<!-- 聊天信息列表组件 -->
 			<block v-for="(item,index) in list" :key="index">
-				<free-chat-item :item="item" :index="index"></free-chat-item>
+				<free-chat-item :item="item" :index="index" :pretime="index > 0 ? list[index-1].create_time : 0"></free-chat-item>
 			</block>
 		</scroll-view>
 		<!-- 底部输入框 -->
@@ -42,14 +42,16 @@
 						user_id:1,
 						nickname:"昵称",
 						type:"text", // image,audio,video
-						data:"123你好你好你好你好你好你好你好你好你好你好"
+						data:"你在教我做事？",
+						create_time:1596501366
 					},
 					{
 						avatar:"/static/images/demo/demo6.jpg",
 						user_id:2,
 						nickname:"昵称",
 						type:"text", // image,audio,video
-						data:"你好你好你好你好你好你好你好你好你好你好"
+						data:"就这？",
+						create_time:1596501371
 					},
 				]
 			}

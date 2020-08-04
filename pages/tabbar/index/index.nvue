@@ -5,7 +5,7 @@
 		<!-- 列表 -->
 		<!-- 置顶列表 -->
 		<block v-for="(item,index) in list" :key="index">
-			<free-media-list v-if="item.istop"  :item="item" :index="index" @long="long"></free-media-list>
+			<free-media-list :pretime="index > 0 ? list[index-1].create_time : 0" v-if="item.istop"  :item="item" :index="index" @long="long"></free-media-list>
 		</block>
 		<!-- 非置顶列表 -->
 		<block v-for="(item,index) in list" :key="index">
