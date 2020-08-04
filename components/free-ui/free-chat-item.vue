@@ -4,8 +4,12 @@
 		<view v-if="showTime" class="flex align-center justify-center pb-4 pt-2">
 			<text class="font-sm text-light-muted">{{showTime}}</text>
 		</view>
+		<!-- 撤回消息 -->
+		<view v-if="item.isremove"  class="flex align-center justify-center pb-4 pt-1 chat-animate" ref="isremove">
+			<text class="font-sm text-light-muted">你撤回了一条信息</text>
+		</view>
 		<!-- 聊天气泡 -->
-		<view class="flex align-start position-relative mb-3" :class="!isself?'justify-start':'justify-end'">
+		<view v-if="!item.isremove" class="flex align-start position-relative mb-3" :class="!isself?'justify-start':'justify-end'">
 			
 			<!-- 好友 -->
 			<template v-if="!isself">
@@ -29,6 +33,9 @@
 <script>
 	import freeAvatar from '@/components/free-ui/free-avatar.vue'
 	import $T from '@/common/free-lib/time.js'
+	// #ifdef APP-PLUS-NVUE
+	const animation = weex.requireModule('animation');
+	// #endif
 	export default {
 		components:{
 			freeAvatar
@@ -49,6 +56,27 @@
 			showTime(){
 				return $T.getChatTime(this.item.create_time,this.pretime);
 			}
+		},
+		mounted() {
+			// #ifdef APP-PLUS-NVUE
+			this.$watch(this.item.isremove, (newValue,oldValue)=>{
+				if(newValue){
+					
+					this.$nextTick(()=>{
+						animation.transition(this.$refs.isremove, {
+						    styles: {
+								opacity:1
+						    },
+						    duration: 100, //ms
+						    timingFunction: 'ease',
+						    }, ()=>{
+						        
+						    })
+					})
+					
+				}
+			})
+			// #endif
 		},
 		methods:{
 			// 判断是否是数组并且有值
@@ -91,5 +119,11 @@
 	.chat-right-icon{
 		right: 80rpx;
 		top: 20rpx;
+	}
+	.chat-animate{
+		/* #ifdef APP-PLUS-NVUE */
+		opacity: 0;
+		/* #endif */
+		
 	}
 </style>

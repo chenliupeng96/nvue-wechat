@@ -28,7 +28,9 @@
 				<view
 				 class="flex align-center flex-1"
 				  hover-class="bg-light" v-for="(menuItem,menuIndex) in menusList"
-				   :key="menuIndex">
+				   :key="menuIndex"
+				   @click="clickEvent(menuItem.event)"
+				   >
 					<text class="font-md pl-3">{{menuItem.name}}</text>
 				</view>
 			</view>
@@ -74,7 +76,7 @@
 					},
 					{
 						name:"撤回",
-						event:""
+						event:"removeChatItem"
 					},
 				],
 				navBarHeight:0,
@@ -85,7 +87,8 @@
 						nickname:"昵称",
 						type:"text", // image,audio,video
 						data:"你在教我做事？",
-						create_time:1596501366
+						create_time:1596501366,
+						isremove:false
 					},
 					{
 						avatar:"/static/images/demo/demo6.jpg",
@@ -93,7 +96,8 @@
 						nickname:"昵称",
 						type:"text", // image,audio,video
 						data:"就这？",
-						create_time:1596501371
+						create_time:1596501371,
+						isremove:false
 					},
 					{
 						avatar:"/static/images/demo/demo6.jpg",
@@ -101,7 +105,8 @@
 						nickname:"昵称",
 						type:"text", // image,audio,video
 						data:"就这？",
-						create_time:1596501371
+						create_time:1596501371,
+						isremove:false
 					},
 					{
 						avatar:"/static/images/demo/demo6.jpg",
@@ -109,7 +114,8 @@
 						nickname:"昵称",
 						type:"text", // image,audio,video
 						data:"你在教我做事？",
-						create_time:1596501366
+						create_time:1596501366,
+						isremove:false
 					},
 					{
 						avatar:"/static/images/demo/demo6.jpg",
@@ -117,7 +123,8 @@
 						nickname:"昵称",
 						type:"text", // image,audio,video
 						data:"你在教我做事？",
-						create_time:1596501366
+						create_time:1596501366,
+						isremove:false
 					},
 					{
 						avatar:"/static/images/demo/demo6.jpg",
@@ -125,7 +132,8 @@
 						nickname:"昵称",
 						type:"text", // image,audio,video
 						data:"就这？",
-						create_time:1596501371
+						create_time:1596501371,
+						isremove:false
 					},
 					{
 						avatar:"/static/images/demo/demo6.jpg",
@@ -133,7 +141,8 @@
 						nickname:"昵称",
 						type:"text", // image,audio,video
 						data:"就这？",
-						create_time:1596501371
+						create_time:1596501371,
+						isremove:false
 					},
 				]
 			}
@@ -167,11 +176,9 @@
 			}
 		},
 		mounted() {
+			let statusBarHeight = 0;
 			// #ifdef APP-PLUS-NVUE
-			var statusBarHeight = plus.navigator.getStatusbarHeight()
-			// #endif
-			// #ifdef MP-WEIXIN
-			var statusBarHeight = 0;
+			statusBarHeight = plus.navigator.getStatusbarHeight()
 			// #endif
 			this.navBarHeight = statusBarHeight + uni.upx2px(90)
 		},
@@ -182,6 +189,25 @@
 				this.propIndex = index;
 				// 显示扩展菜单
 				this.$refs['extend'].show(x,y);
+			},
+			// 点击操作菜单
+			clickEvent(event){
+				switch(event){
+					case "removeChatItem":
+						this.removeChatItem();
+						break;
+					case "delChat": // 删除当前会话
+						this.delChat();
+						break;
+				}
+				this.$refs['extend'].hide();
+			},
+			// 撤回消息
+			removeChatItem(){
+				if(this.propIndex>-1){
+					this.list[this.propIndex].isremove = true
+				}
+				
 			}
 		}
 	}

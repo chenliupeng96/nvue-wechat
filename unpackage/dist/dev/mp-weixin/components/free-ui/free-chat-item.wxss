@@ -6,4 +6,6 @@
 	right: 80rpx;
 	top: 20rpx;
 }
+.chat-animate{
+}
 
