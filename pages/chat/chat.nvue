@@ -8,7 +8,7 @@
 		<scroll-view scroll-y  class="bg-light position-fixed left-0 right-0 p-3" :style="'top:'+navBarHeight+'px'"  style="bottom: 105rpx;">
 			<!-- 聊天信息列表组件 -->
 			<block v-for="(item,index) in list" :key="index">
-				<free-chat-item :item="item" :index="index" :pretime="index > 0 ? list[index-1].create_time : 0"></free-chat-item>
+				<free-chat-item :item="item" :index="index" :pretime="index > 0 ? list[index-1].create_time : 0"  @long="long"></free-chat-item>
 			</block>
 		</scroll-view>
 		<!-- 底部输入框 -->
@@ -20,6 +20,19 @@
 			<free-icon-button  :icon="'\ue605'"></free-icon-button>
 			<free-icon-button  :icon="'\ue603'"></free-icon-button>
 		</view>
+		
+		<!-- 弹出层 -->
+		<free-popup ref="extend" :bodyWidth="300" :bodyHeight="getMenusHeight" tabbarHeight="105">
+			<view class="flex flex-column" style="width: 240rpx;" :style="getMenusStyle" >
+				
+				<view
+				 class="flex align-center flex-1"
+				  hover-class="bg-light" v-for="(menuItem,menuIndex) in menusList"
+				   :key="menuIndex">
+					<text class="font-md pl-3">{{menuItem.name}}</text>
+				</view>
+			</view>
+		</free-popup>
 	</view>
 </template>
 
@@ -27,14 +40,43 @@
 	import freeNavBar from '@/components/free-ui/free-nav-bar.vue'
 	import freeIconButton from '@/components/free-ui/free-icon-button.vue'
 	import freeChatItem from '@/components/free-ui/free-chat-item.vue'
+	import freePopup from '@/components/free-ui/free-popup.vue'
 	export default {
 		components:{
 			freeNavBar,
 			freeIconButton,
-			freeChatItem
+			freeChatItem,
+			freePopup
 		},
 		data() {
 			return {
+				propIndex:-1, // 气泡弹窗索引
+				menus:[
+					{
+						name:"复制",
+						event:""
+					},
+					{
+						name:"发送给好友",
+						event:""
+					},
+					{
+						name:"收藏",
+						event:""
+					},
+					{
+						name:"删除",
+						event:""
+					},
+					{
+						name:"多选",
+						event:""
+					},
+					{
+						name:"撤回",
+						event:""
+					},
+				],
 				navBarHeight:0,
 				list:[
 					{
@@ -53,7 +95,75 @@
 						data:"就这？",
 						create_time:1596501371
 					},
+					{
+						avatar:"/static/images/demo/demo6.jpg",
+						user_id:2,
+						nickname:"昵称",
+						type:"text", // image,audio,video
+						data:"就这？",
+						create_time:1596501371
+					},
+					{
+						avatar:"/static/images/demo/demo6.jpg",
+						user_id:1,
+						nickname:"昵称",
+						type:"text", // image,audio,video
+						data:"你在教我做事？",
+						create_time:1596501366
+					},
+					{
+						avatar:"/static/images/demo/demo6.jpg",
+						user_id:1,
+						nickname:"昵称",
+						type:"text", // image,audio,video
+						data:"你在教我做事？",
+						create_time:1596501366
+					},
+					{
+						avatar:"/static/images/demo/demo6.jpg",
+						user_id:2,
+						nickname:"昵称",
+						type:"text", // image,audio,video
+						data:"就这？",
+						create_time:1596501371
+					},
+					{
+						avatar:"/static/images/demo/demo6.jpg",
+						user_id:2,
+						nickname:"昵称",
+						type:"text", // image,audio,video
+						data:"就这？",
+						create_time:1596501371
+					},
 				]
+			}
+		},
+		computed:{
+			// 动态获取菜单高度
+			getMenusHeight(){
+				let H = 100;
+				return this.menus.length * H;
+			},
+			// 获取菜单样式
+			getMenusStyle(){
+				return `height:${this.getMenusHeight}rpx;`
+			},
+			// 判断是否是本人操作
+			isdoSelf(){
+				// 获取本人id
+				let id = 1
+				let user_id = this.propIndex > -1 ? this.list[this.propIndex].user_id : 0
+				return user_id === id
+			},
+			// 获取操作菜单
+			menusList(){
+				return this.menus.filter(v=>{
+					if (v.name === '撤回' && !this.isdoSelf){
+						return false
+					} else {
+						return true
+					}
+				})
 			}
 		},
 		mounted() {
@@ -66,7 +176,13 @@
 			this.navBarHeight = statusBarHeight + uni.upx2px(90)
 		},
 		methods: {
-			
+			// 长按消息气泡
+			long({x,y,index}){
+				// 初始化
+				this.propIndex = index;
+				// 显示扩展菜单
+				this.$refs['extend'].show(x,y);
+			}
 		}
 	}
 </script>

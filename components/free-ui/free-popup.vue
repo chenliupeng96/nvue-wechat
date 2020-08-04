@@ -47,6 +47,10 @@
 			transformOrigin:{
 				type:String,
 				default:"left top"
+			},
+			tabbarHeight:{
+				type:Number,
+				default:0
 			}
 			
 		},
@@ -63,7 +67,7 @@
 			try{
 				let res = uni.getSystemInfoSync()
 				this.maxX = res.windowWidth - uni.upx2px(this.bodyWidth);
-				this.maxY = res.windowHeight - uni.upx2px(this.bodyHeight);
+				this.maxY = res.windowHeight - uni.upx2px(this.bodyHeight)-uni.upx2px(this.tabbarHeight);
 			}catch(e){
 				//TODO handle the exception
 			}

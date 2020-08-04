@@ -1,5 +1,5 @@
 <template>
-	<view>
+	<div @longpress="long">
 		<!-- 时间显示 -->
 		<view v-if="showTime" class="flex align-center justify-center pb-4 pt-2">
 			<text class="font-sm text-light-muted">{{showTime}}</text>
@@ -22,9 +22,8 @@
 				<text class="iconfont text-chat-item font-md position-absolute chat-right-icon">&#xe640;</text>
 				<free-avatar size="70" src="/static/images/demo/demo6.jpg"></free-avatar>
 			</template>
-			
 		</view>
-	</view>
+	</div>
 </template>
 
 <script>
@@ -50,6 +49,36 @@
 			showTime(){
 				return $T.getChatTime(this.item.create_time,this.pretime);
 			}
+		},
+		methods:{
+			// 判断是否是数组并且有值
+			isArrayOrValuable(value) {
+				return Array.isArray(value) && value.length > 0
+			},
+			long(e) {
+				let x = 0;
+				let y = 0;
+				let {
+					changedTouches
+				} = e;
+				console.log(changedTouches);
+				if (this.isArrayOrValuable(changedTouches)) {
+			
+					// #ifdef MP-WEIXIN
+					x = changedTouches[0].clientX;
+					y = changedTouches[0].clientY;
+					// #endif
+					// #ifdef APP-PLUS-NVUE
+					x = changedTouches[0].screenX;
+					y = changedTouches[0].screenY;
+					// #endif
+				}
+				this.$emit('long', {
+					x,
+					y,
+					index: this.index
+				}, )
+			},
 		}
 	}
 </script>
