@@ -1,21 +1,21 @@
 <template>
 	<view>
 		<!-- 导航栏 -->
-		<free-nav-bar title="翠兰" noreadnum="1" showBack>
+		<free-nav-bar title="张泽杰" noreadnum="1" showBack>
 			<free-icon-button slot="right" :icon="'\ue6fd'"></free-icon-button>
 		</free-nav-bar>
 		<!-- 聊天内容区域 -->
-		<scroll-view scroll-y  class="bg-light position-fixed left-0 right-0 p-3" :style="'top:'+navBarHeight+'px'"  style="bottom: 105rpx;">
+		<scroll-view scroll-y  class="bg-light position-fixed left-0 right-0 p-3" :style="chatBodyBottom"  style="bottom: 105rpx;" :show-scrollbar="false">
 			<!-- 聊天信息列表组件 -->
 			<block v-for="(item,index) in list" :key="index">
-				<free-chat-item :item="item" :index="index" :pretime="index > 0 ? list[index-1].create_time : 0"  @long="long"></free-chat-item>
+				<free-chat-item ref="chatItem" :item="item" :index="index" :pretime="index > 0 ? list[index-1].create_time : 0"  @long="long"></free-chat-item>
 			</block>
 		</scroll-view>
 		<!-- 底部输入框 -->
-		<view class="position-fixed left-0 right-0 bottom-0 border-top flex align-center" style="background-color: #F7F7F6;height: 105rpx;">
+		<view :style="'bottom:'+KeyboardHeight+'px;'" class="position-fixed left-0 right-0  border-top flex align-center" style="background-color: #F7F7F6;height: 105rpx;">
 			<free-icon-button :icon="'\ue606'"></free-icon-button>
 			<view class="flex-1">
-				<textarea fixed class="border bg-white rounded p-1 font-md" style="height: 75rpx;" />
+				<textarea fixed class="border bg-white rounded p-1 font-md" style="height: 75rpx;" :adjust-position="false" />
 			</view>
 			<free-icon-button  :icon="'\ue605'"></free-icon-button>
 			<free-icon-button  :icon="'\ue603'"></free-icon-button>
@@ -43,6 +43,9 @@
 	import freeIconButton from '@/components/free-ui/free-icon-button.vue'
 	import freeChatItem from '@/components/free-ui/free-chat-item.vue'
 	import freePopup from '@/components/free-ui/free-popup.vue'
+	// #ifdef APP-PLUS-NVUE
+	const domModule = weex.requireModule('dom')
+	// #endif
 	export default {
 		components:{
 			freeNavBar,
@@ -52,6 +55,7 @@
 		},
 		data() {
 			return {
+				KeyboardHeight:0, // 键盘高度
 				propIndex:-1, // 气泡弹窗索引
 				menus:[
 					{
@@ -173,6 +177,10 @@
 						return true
 					}
 				})
+			},
+			// 聊天区域bottom
+			chatBodyBottom(){
+				return `bottom:${uni.upx2px(105)+this.KeyboardHeight}px;top:${this.navBarHeight}px;`
 			}
 		},
 		mounted() {
@@ -181,8 +189,32 @@
 			statusBarHeight = plus.navigator.getStatusbarHeight()
 			// #endif
 			this.navBarHeight = statusBarHeight + uni.upx2px(90)
+			
+			// 监听键盘高度
+			uni.onKeyboardHeightChange(res=>{
+				this.KeyboardHeight = res.height;
+				if(this.KeyboardHeight > 0){
+					setTimeout(()=>{
+						this.$nextTick(()=>{
+							this.pageToBottom()
+						})
+					},300)
+				}
+			})
 		},
 		methods: {
+			// 回到底部
+			pageToBottom(){
+					// #ifdef APP-PLUS-NVUE
+					let chatItem = this.$refs.chatItem;
+					let lastIndex = chatItem.length > 0 ? chatItem.length-1 : 0
+					if(chatItem[lastIndex]){
+					domModule.scrollToElement(chatItem[lastIndex],{})
+					}
+					// #endif
+				
+				
+			},
 			// 长按消息气泡
 			long({x,y,index}){
 				// 初始化
