@@ -5,7 +5,7 @@
 			<text class="font-sm text-light-muted">{{showTime}}</text>
 		</view>
 		<!-- 撤回消息 -->
-		<view v-if="item.isremove"  class="flex align-center justify-center pb-4 pt-1 chat-animate" ref="isremove">
+		<view v-if="item.isremove"  class="flex align-center justify-center pb-4 pt-1 " ref="isremove">
 			<text class="font-sm text-light-muted">你撤回了一条信息</text>
 		</view>
 		<!-- 聊天气泡 -->
@@ -24,7 +24,7 @@
 			<!-- 本人 -->
 			<template v-if="isself">
 				<text class="iconfont text-chat-item font-md position-absolute chat-right-icon">&#xe640;</text>
-				<free-avatar size="70" src="/static/images/demo/demo6.jpg"></free-avatar>
+				<free-avatar size="70" :src="item.avatar"></free-avatar>
 			</template>
 		</view>
 	</div>

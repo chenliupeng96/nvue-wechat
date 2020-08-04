@@ -110,6 +110,7 @@
 				// #endif
 			},
 			hide() {
+				this.$emit('hide');
 				// #ifdef APP-PLUS-NVUE
 				this.$nextTick(()=>{
 					animation.transition(this.$refs.popup, {
