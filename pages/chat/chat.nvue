@@ -15,10 +15,18 @@
 		<view :style="'bottom:'+KeyboardHeight+'px;'" class="position-fixed left-0 right-0  border-top flex align-center" style="background-color: #F7F7F6;height: 105rpx;">
 			<free-icon-button :icon="'\ue606'"></free-icon-button>
 			<view class="flex-1">
-				<textarea fixed class="border bg-white rounded p-1 font-md" style="height: 75rpx;" :adjust-position="false" />
+				<textarea v-model="text" fixed class="border bg-white rounded p-1 font-md" style="height: 75rpx;" :adjust-position="false" />
 			</view>
 			<free-icon-button  :icon="'\ue605'"></free-icon-button>
-			<free-icon-button  :icon="'\ue603'"></free-icon-button>
+			<template v-if="text.length===0">
+				<free-icon-button  :icon="'\ue603'"></free-icon-button>
+			</template>
+			<template v-else>
+				<view class="main-bg-color rounded mr-2 px-2 py-1" @click="send('text')">
+					<text class="font text-white">发送</text>
+				</view>
+			</template>
+			
 		</view>
 		
 		<!-- 弹出层 -->
@@ -55,6 +63,7 @@
 		},
 		data() {
 			return {
+				text:"", //输入框文本
 				KeyboardHeight:0, // 键盘高度
 				propIndex:-1, // 气泡弹窗索引
 				menus:[
@@ -203,6 +212,34 @@
 			})
 		},
 		methods: {
+			// 发送
+			send(type){
+				
+				let obj = {
+						avatar:"/static/images/demo/demo6.jpg",
+						user_id:1,
+						nickname:"昵称",
+						type:type, // image,audio,video
+						data:"",
+						create_time:(new Date()).getTime(),
+						isremove:false
+					};
+				switch(type){
+					case "text":
+						obj.data=this.text;
+						break;
+				}
+				this.list.push(obj);
+				// 发送文字成功
+				if(type==="text"){
+					this.text=""
+				}
+				setTimeout(()=>{
+					this.$nextTick(()=>{
+						this.pageToBottom();
+					})
+				},300)
+			},
 			// 回到底部
 			pageToBottom(){
 					// #ifdef APP-PLUS-NVUE
