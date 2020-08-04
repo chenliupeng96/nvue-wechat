@@ -7,22 +7,9 @@
 		<!-- 聊天内容区域 -->
 		<scroll-view scroll-y  class="bg-light position-fixed left-0 right-0 p-3" :style="'top:'+navBarHeight+'px'"  style="bottom: 105rpx;">
 			<!-- 聊天信息列表组件 -->
-			
-			<view class="flex align-start justify-start position-relative mb-3">
-				<free-avatar size="70" src="/static/images/demo/demo6.jpg"></free-avatar>
-				<text class="iconfont text-white font-md position-absolute chat-left-icon">&#xe609;</text>
-				<div class="bg-white p-2 rounded ml-3" style="max-width:500rpx;">
-					<text class="font-md">你好你好你好你好你好你好你好你好你好你好你好你好你好你好</text>
-				</div>
-			</view>
-			
-			<view class="flex align-start justify-end mb-3 position-relative">
-				<div class="bg-chat-item p-2 rounded mr-3" style="max-width:500rpx;">
-					<text class="font-md">你好你好你好你好你好你好你好你好你好你好你好你好你好你好</text>
-				</div>
-				<text class="iconfont text-chat-item font-md position-absolute chat-right-icon">&#xe640;</text>
-				<free-avatar size="70" src="/static/images/demo/demo6.jpg"></free-avatar>
-			</view>
+			<block v-for="(item,index) in list" :key="index">
+				<free-chat-item :item="item" :index="index"></free-chat-item>
+			</block>
 		</scroll-view>
 		<!-- 底部输入框 -->
 		<view class="position-fixed left-0 right-0 bottom-0 border-top flex align-center" style="background-color: #F7F7F6;height: 105rpx;">
@@ -39,16 +26,32 @@
 <script>
 	import freeNavBar from '@/components/free-ui/free-nav-bar.vue'
 	import freeIconButton from '@/components/free-ui/free-icon-button.vue'
-	import freeAvatar from '@/components/free-ui/free-avatar.vue'
+	import freeChatItem from '@/components/free-ui/free-chat-item.vue'
 	export default {
 		components:{
 			freeNavBar,
 			freeIconButton,
-			freeAvatar
+			freeChatItem
 		},
 		data() {
 			return {
-				navBarHeight:0
+				navBarHeight:0,
+				list:[
+					{
+						avatar:"/static/images/demo/demo6.jpg",
+						user_id:1,
+						nickname:"昵称",
+						type:"text", // image,audio,video
+						data:"123你好你好你好你好你好你好你好你好你好你好"
+					},
+					{
+						avatar:"/static/images/demo/demo6.jpg",
+						user_id:2,
+						nickname:"昵称",
+						type:"text", // image,audio,video
+						data:"你好你好你好你好你好你好你好你好你好你好"
+					},
+				]
 			}
 		},
 		mounted() {
@@ -67,12 +70,5 @@
 </script>
 
 <style>
-.chat-left-icon {
-	left: 80rpx;top: 20rpx;
-	
-}
-.chat-right-icon{
-	right: 80rpx;
-	top: 20rpx;
-}
+
 </style>
