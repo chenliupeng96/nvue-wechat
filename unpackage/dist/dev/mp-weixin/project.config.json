@@ -38,27 +38,6 @@
 			"list": [
 				{
 					"id": -1,
-					"name": "pages/tabbar/mail/mail",
-					"pathName": "pages/tabbar/mail/mail",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/tabbar/find/find",
-					"pathName": "pages/tabbar/find/find",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/tabbar/my/my",
-					"pathName": "pages/tabbar/my/my",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
 					"name": "pages/chat/chat",
 					"pathName": "pages/chat/chat",
 					"scene": null

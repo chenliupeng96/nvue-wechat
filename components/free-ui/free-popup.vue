@@ -89,7 +89,9 @@
 		},
 		methods: {
 			show(x = -1, y = -1) {
-				
+				if(this.status){
+					return;
+				}
 				this.x = (x>this.maxX)?this.maxX:x;
 				this.y = (y>this.maxY)?this.maxY:y;
 				this.status = true;
